@@ -1,0 +1,48 @@
+<ion-content>
+
+    <ion-card class="adv-map">
+        <div style="position: relative">
+          <img src="./assets/imgs/map.png">
+          <!-- <ion-fab left top>
+            <button ion-fab class="fab-map">
+              <ion-icon name='navigate'></ion-icon>
+            </button>
+          </ion-fab> -->
+          <ion-fab right top>
+              <button ion-fab class="fab-map">
+                <ion-icon name='md-locate'></ion-icon>
+              </button>
+            </ion-fab>
+        </div>
+        <ion-item *ngFor="let contact of reqUserData">
+          <ion-icon color="subtle" large item-start name='md-contact'></ion-icon>
+          <h2>{{contact.userName}}</h2>
+          <p>{{contact.userMobile}}</p>
+        </ion-item>
+        <ion-item *ngFor="let location of requestLocation">
+          <ion-icon color="subtle" large item-start name='md-pin'></ion-icon>
+          <h2>{{location.thoroughfare}}, {{location.subLocality}}</h2>
+          <p>{{location.subAdministrativeArea}}, {{location.administrativeArea}}-{{location.postalCode}}, {{location.countryName}}</p>
+        </ion-item>
+        <ion-item actions>
+          <span ion-text item-start color="secondary" class="item-bold">{{distanceKM}} km</span>
+          <span ion-text item-start color="subtle">(distance)</span>
+          <!-- <button ion-button color="primary" clear item-end icon-start>
+            <ion-icon name='navigate'></ion-icon>
+            Start
+          </button> -->
+        </ion-item>
+        <ion-item actions>
+            <button ion-button outline icon-start (click)="responceToFriendReq('A')">
+                <ion-icon name='md-checkmark' is-active="false"></ion-icon>
+                Accept
+              </button>
+              <button ion-button outline icon-start color="danger" (click)="responceToFriendReq('C')">
+                  <ion-icon name='md-close' is-active="false"></ion-icon>
+                  Cancel
+                </button>
+          </ion-item>
+      
+      </ion-card>
+
+</ion-content>

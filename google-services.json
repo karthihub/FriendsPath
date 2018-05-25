@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "746856697032",
+    "firebase_url": "https://kv-locators.firebaseio.com",
+    "project_id": "kv-locators",
+    "storage_bucket": "kv-locators.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746856697032:android:e407e417a069d4f6",
+        "android_client_info": {
+          "package_name": "com.ionicframework.FriendsPath"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746856697032-io5h39ei2r9nnvurl1n3jocla22hsi5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBReaCrisqMWCceoj-DK58BtnHA8h6JS5c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,142 @@
+page-contact-list {
+
+        //1F5176
+        ion-content {
+           background-color: #441F76 !important;
+           color: #dedede !important;
+   
+           ion-grid, ion-card, ion-list, ion-item, button{
+               background-color: #441F76 !important;
+               color: #dedede !important;
+           }
+   
+           .card-md{
+               box-shadow: unset;
+               border-radius: unset;
+           }
+   
+           .logo{
+               width: 40%;
+               margin: 0 auto;
+               padding: 14% 0%;
+           }
+   
+           ion-input, ion-label{
+               color: #dedede;
+           }
+   
+           .text-input::-moz-placeholder {
+               color: #dedede;
+             }
+             
+             .text-input:-ms-input-placeholder {
+               color: #dedede;
+             }
+             
+             .text-input::-webkit-input-placeholder {
+               text-indent: 0;
+               color: #dedede;
+             }
+   
+             .list-md .item-input{
+               border-bottom: 1px solid #dedede;
+             }
+             
+             .input-has-focus .label-md[floating]{
+                 color: #dedede !important; 
+             }
+   
+             .item-input .label-md, .item-select .label-md, .item-datetime .label-md{
+               color: #dedede !important; 
+             }
+   
+             .login-btn{
+                 border: 1px solid #fff;
+                 margin: 20% 0% 3% 0%;
+             }
+   
+             .list-md .item-input.input-has-focus:last-child {
+               border-bottom-color: #dedede;
+               box-shadow: unset;
+             }
+   
+             .card-md p {
+               margin: 1%;
+               font-size: 1.2rem;
+               font-weight: normal;
+               line-height: 1.5;
+               color: #fff;
+           }
+   
+           .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner, 
+           .item-md.item-input.input-has-focus .item-inner,
+           .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child{
+               border-bottom-color: unset;
+               box-shadow: unset;
+           }
+   
+           .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+               border-bottom-color: transparent;
+               -webkit-box-shadow: inset 0 -1px 0 0 transparent;
+               box-shadow: inset 0 -1px 0 0 transparent;
+             }
+   
+             .item-md.item-input.item-input-has-focus .item-inner, .item-md.item-input.input-has-focus .item-inner{
+               border-bottom-color: transparent;
+               -webkit-box-shadow: inset 0 -1px 0 0 transparent;
+               box-shadow: inset 0 -1px 0 0 transparent;
+             }
+   
+             .list-md .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child, .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child{
+               border-bottom-color: #dedede;
+               -webkit-box-shadow: inset 0 -1px 0 0 #dedede;
+               box-shadow: inset 0 -1px 0 0 #dedede;
+             }
+   
+             .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+               border-bottom-color: transparent;
+               -webkit-box-shadow: inset 0 -1px 0 0 transparent;
+               box-shadow: inset 0 -1px 0 0 transparent;
+             }
+   
+             .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus):last-child{
+               border-bottom-color: #dedede;
+               -webkit-box-shadow: inset 0 -1px 0 0 #dedede;
+               box-shadow: inset 0 -1px 0 0 #dedede;
+             }
+   
+           .signin{
+               text-align: center;
+               margin: 0 auto;
+               display: block;
+               margin-top: 5%;
+             }
+   
+             .btn-center{
+               text-align: center;
+               display: block;
+               margin: auto;
+               border:1px solid #fff;
+             }
+   
+             .contact-icon{
+               font-size: 8rem;
+               text-align: center;
+               display: block;
+               margin: 6% 0%;
+             }
+
+             .card-md h2{
+                 color: #fff;
+             }
+
+             .list-md ion-item-sliding{
+                border-bottom: 1px solid #fff;
+             }
+   
+           
+       }
+   
+   }
+
+

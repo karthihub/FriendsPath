@@ -1,0 +1,50 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content>
+
+    <ion-grid >
+        <ion-card >
+            <form [formGroup]="userLoginData">
+            <ion-list >
+                <ion-item style="text-align: center;">
+                        <img class="logo" src="./assets/imgs/f_pathnew512.png" />
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Username</ion-label>
+                    <ion-input type="text" formControlName="userName"></ion-input>
+                  </ion-item>
+                  <p class="restriction" *ngIf="!userLoginData.controls.userName.valid && (userLoginData.controls.userName.dirty || submitAtttempt)">
+                    <span>* </span>User Name should be minimam 4 Char</p>
+                
+                    <ion-item>
+                        <ion-label floating>Password</ion-label>
+                        <ion-input type="password" formControlName="password"></ion-input>
+                      </ion-item>
+                      <p class="restriction" *ngIf="!userLoginData.controls.password.valid && (userLoginData.controls.password.dirty || submitAtttempt)">
+                        <span>* </span>Password Must be 8 Char Minimum</p>
+
+              </ion-list> 
+
+              <button class="login-btn" [disabled]="!userLoginData.valid" ion-button block (click)="signInPageNavigation()">Login</button>
+              <button ion-button class="signup" clear (click)="signupPageNavigation()">You are Not Register?</button>
+              <button ion-button class="forgot" clear (click)="forgotPageNavigation()">Forgot Password?</button>
+            
+              </form>
+        </ion-card>
+      </ion-grid>
+
+</ion-content>

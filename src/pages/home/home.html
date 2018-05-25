@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Home</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+
+    <div #map id="map"> 
+    </div>
+  <ion-fab left bottom>
+    <button ion-fab color="light"><ion-icon name="md-more"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="addContactModal()"><ion-icon name="md-person-add" ></ion-icon></button>
+      <button ion-fab (click)="viewContactListModal()"><ion-icon name="md-contacts"></ion-icon></button>
+      <button ion-fab (click)="requestToMeet()"><ion-icon name="md-star-outline"></ion-icon></button>
+    </ion-fab-list>
+    <ion-fab-list side="right">
+      <button ion-fab (click)="friendsLastPath()"><ion-icon name="md-paw"></ion-icon></button>
+      <button ion-fab (click)="clearMarkers()">Clear Markers</button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="mapCenterPosition()"><ion-icon name="md-locate"></ion-icon></button>
+  </ion-fab>
+  </ion-content>

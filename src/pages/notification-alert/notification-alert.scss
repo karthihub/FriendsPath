@@ -1,0 +1,55 @@
+page-notification-alert {
+
+    ion-content{
+        display: block;
+        width: 85%;
+        height: 70.7%;
+        margin: 0 auto;
+        margin-top: 30%;
+        -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+        position: relative !important;
+
+        ion-card.adv-map p {
+            font-size: 0.7em !important;
+          }
+          
+          button[fab].fab-map {
+            top: calc(100% - 35px);
+            z-index: 50;
+          }
+          
+          .item-bold {
+            font-weight: bold;
+          }
+          
+          ion-content.cards-bg {
+            background-color: #f4f4f7;
+          }
+
+          .item-md h2 {
+            margin: 2px 0;
+            font-size: 1.6rem;
+            font-weight: normal;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .item-md p {
+          margin: 0 0 2px;
+          font-size: 1.4rem;
+          line-height: normal;
+          text-overflow: inherit;
+          color: #666;
+          overflow: hidden;
+          white-space: nowrap;
+      }
+
+      .item-md .item-button {
+        width: 48%;
+    }
+
+    }
+
+}
