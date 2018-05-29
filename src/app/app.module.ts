@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler, ToastController, LoadingController } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, ToastController, LoadingController, MenuController, NavController } from 'ionic-angular';
 import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -31,7 +31,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp, 
   ],
   providers: [
     StatusBar,

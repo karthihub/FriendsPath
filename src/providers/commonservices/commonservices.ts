@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CommonservicesProvider {
 
-  api:any                 = "https://www.skeinlab.com/skeinfp";
-  // api:any = "http://stracker-app-skein-tracker-application.7e14.starter-us-west-2.openshiftapps.com";
+  // api:any                 = "https://www.skeinlab.com/skeinfp";
+  api:any = "http://192.168.1.8:6004";
   empRegistration = "empRegistration";
   useAuthendication = "useAuthendication";
   empContactAdd = "empContactAdd";
@@ -14,6 +14,10 @@ export class CommonservicesProvider {
   updateLatLngRequest = "updateLatLngRequest";
   putContactStar = "putContactStar";
   getFriendsPath = "getFriendsPath";
+  addNewUserGroup = "addNewUserGroup";
+  getUserGroupList = "getUserGroupList";
+  updateUserGroup = "updateUserGroup";
+  deleteUserGroup = "deleteUserGroup";
   // constructor(public http: HttpClient) {
   //   console.log('Hello CommonservicesProvider Provider');
   // }

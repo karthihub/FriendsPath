@@ -68,10 +68,10 @@ export class ContactListPage {
 
   requestToMeet(userMobile){
     this.loadingCtrl.presentLoadingWindow('Please Wait');
-    this.geolocation.getCurrentPosition().then((location) => {
+    // this.geolocation.getCurrentPosition().then((location) => {
     console.log(location);
-    var userLat =  location.coords.latitude;
-    var userLng =  location.coords.longitude;
+    var userLat =  this.mainServices.currentLatitude;
+    var userLng =  this.mainServices.currentLongitude;
     let headers = new Headers(
       {
         'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ export class ContactListPage {
         }
       }
       );
-    });
+    // });
   }
 
   chechResponcefromOtherEnd(userMobile){

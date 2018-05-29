@@ -20,7 +20,9 @@
     </ion-fab-list>
     <ion-fab-list side="right">
       <button ion-fab (click)="friendsLastPath()"><ion-icon name="md-paw"></ion-icon></button>
-      <button ion-fab (click)="clearMarkers()">Clear Markers</button>
+      <button ion-fab (click)="clearMarkers()">
+        <div class="cross-line"></div>
+        <ion-icon name="md-pin"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 

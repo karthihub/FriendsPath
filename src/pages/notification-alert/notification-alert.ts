@@ -7,6 +7,7 @@ import { ToastControllerComponent } from '../../components/toast-controller/toas
 import { LoadingControllerComponent } from '../../components/loading-controller/loading-controller';
 import { CommonservicesProvider } from '../../providers/commonservices/commonservices';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { MyApp } from '../../app/app.component';
 
 /**
  * Generated class for the NotificationAlertPage page.
@@ -31,7 +32,7 @@ export class NotificationAlertPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private nativeGeocoder: NativeGeocoder,
               private googleMaps: GoogleMaps, private geolocation: Geolocation, private view: ViewController,
               public loadingCtrl: LoadingControllerComponent, public commonService: CommonservicesProvider,
-              private http: Http, public messageCtrl: ToastControllerComponent) {
+              private http: Http, public messageCtrl: ToastControllerComponent, public mainServices: MyApp) {
 
     console.log(navParams.get('notification'));
     this.globalData = navParams.get('notification');
@@ -64,18 +65,18 @@ export class NotificationAlertPage {
   }
 
   getDistanceFromLatLonInKm(lat2,lon2) {
-    this.geolocation.getCurrentPosition().then((location) => {
+    // this.geolocation.getCurrentPosition().then((location) => {
     var R = 6371; // Radius of the earth in km
-    var dLat = this.deg2rad(lat2-location.coords.latitude);  // deg2rad below
-    var dLon = this.deg2rad(lon2-location.coords.longitude); 
+    var dLat = this.deg2rad(lat2-this.mainServices.currentLatitude);  // deg2rad below
+    var dLon = this.deg2rad(lon2-this.mainServices.currentLongitude); 
     var a = 
       Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(this.deg2rad(location.coords.latitude)) * Math.cos(this.deg2rad(lat2)) * 
+      Math.cos(this.deg2rad(this.mainServices.currentLatitude)) * Math.cos(this.deg2rad(lat2)) * 
       Math.sin(dLon/2) * Math.sin(dLon/2); 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     this.distanceKM = Math.round( (R * c) * 10 ) / 10;; // Distance in km
     console.log("Distance in km==>>", this.distanceKM );
-    });
+    // });
   }
 
   deg2rad(deg) {
@@ -88,10 +89,10 @@ export class NotificationAlertPage {
 
   responceToFriendReq(reqStatus){
     this.loadingCtrl.presentLoadingWindow('Please Wait');
-    this.geolocation.getCurrentPosition().then((location) => {
+    // this.geolocation.getCurrentPosition().then((location) => {
     console.log(location);
-    var userLat =  location.coords.latitude;
-    var userLng =  location.coords.longitude;
+    var userLat =  this.mainServices.currentLatitude;
+    var userLng =  this.mainServices.currentLongitude;
     let headers = new Headers(
       {
         'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ export class NotificationAlertPage {
         }
       }
       );
-    });
+    // });
   }
 
 }

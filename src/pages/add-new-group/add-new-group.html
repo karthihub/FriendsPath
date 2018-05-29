@@ -1,0 +1,55 @@
+<!--
+  Generated template for the ContactModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <ion-buttons right>
+          <button  ion-button icon-only (click)="closeAddNewGroupModal()">
+            <ion-icon name="md-close"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Add New Group</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-grid style=" margin-bottom: 3%;">
+        <ion-card >
+            <ion-list >
+                <ion-item>
+                    <ion-label floating>Group Name*</ion-label>
+                    <ion-input type="text" [(ngModel)]='groupName'></ion-input>
+                  </ion-item>
+
+                    <ion-item>
+                      Add Group Members [Mini 01, Max 10]
+                    </ion-item>
+
+                      <div class="contactList">
+                        <p>Select Contacts..</p>
+                        <span *ngFor="let contact of contactList" (click)="addMember(contact)">
+                            {{contact.contactName}}
+                            <ion-icon name="ios-checkmark" item-end></ion-icon>
+                        </span>
+                      </div>
+
+                      <div class="selectedgroupList">
+                          <p>Selected Contacts..</p>
+                          <span *ngFor="let contact of groupMemList" (click)="removeMember(contact)">
+                              {{contact.contactName}}
+                              <ion-icon name="ios-close" item-end></ion-icon>
+                          </span>
+                        </div>
+              </ion-list> 
+              <button class="login-btn"  ion-button block (click)="addNewGroup()">Add Group</button>
+        </ion-card>
+      </ion-grid>
+
+</ion-content>

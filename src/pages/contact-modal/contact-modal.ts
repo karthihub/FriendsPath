@@ -76,7 +76,7 @@ export class ContactModalPage {
           case 200:
             this.loadingCtrl.dismissLoadingWindow();
             this.messageCtrl.presentToast(success.message, "greenClr");
-            this.navCtrl.push("HomePage");
+            this.view.dismiss();
             break;
           case 401:
             this.loadingCtrl.dismissLoadingWindow();

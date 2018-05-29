@@ -1,12 +1,12 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Platform, MenuController } from 'ionic-angular';
 import { ToastControllerComponent } from '../../components/toast-controller/toast-controller';
 import { LoadingControllerComponent } from '../../components/loading-controller/loading-controller';
 import { CommonservicesProvider } from '../../providers/commonservices/commonservices';
 import { GoogleMaps, GoogleMap, GoogleMapOptions, GoogleMapsEvent, Marker, MarkerOptions, HtmlInfoWindow, LatLng } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Http, Headers, RequestOptions } from '@angular/http';
-
+import { MyApp } from '../../app/app.component';
 declare var google;
 
 @IonicPage()
@@ -23,19 +23,21 @@ export class HomePage {
   lat: number ;
   lng: number ;
   markers: Array<any> = [];
-  zoom: number = 13;
-
+  zoom: number = 15;
+  
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   public markerList:Array<any> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public messageCtrl: ToastControllerComponent, 
               public loadingCtrl: LoadingControllerComponent, public modalCtrl: ModalController,
-               private platform: Platform, private geolocation: Geolocation,
-              public commonService: CommonservicesProvider, private http: Http) {
+              private platform: Platform, private geolocation: Geolocation,
+              public commonService: CommonservicesProvider, private http: Http, public menuCtrl: MenuController,
+              public mainServices: MyApp) {
 
       this.userName = localStorage.getItem('userName');
       this.markerList = [];
+      this.menuCtrl.swipeEnable(false);
   }
 
   ionViewDidLoad() {
@@ -46,8 +48,8 @@ export class HomePage {
   loadMap(){
     this.loadingCtrl.presentLoadingWindow('');
     this.markerList = [];
-    this.geolocation.getCurrentPosition().then((location) => {
-        let latLng = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
+    // this.geolocation.getCurrentPosition().then((location) => {
+        let latLng = new google.maps.LatLng(this.mainServices.currentLatitude, this.mainServices.currentLongitude);
     
         let mapOptions = {
           center: latLng,
@@ -68,25 +70,26 @@ export class HomePage {
           map: this.map,
           draggable: false,
           animation: google.maps.Animation.BOUNCE,
-          position: {lat: location.coords.latitude, lng: location.coords.longitude}
+          position: latLng,
+          icon: './assets/imgs/current.svg'
         });
 
-        this.markerList.push(new google.maps.LatLng(location.coords.latitude ,location.coords.longitude));
+        this.markerList.push(latLng);
 
         var cityCircle = new google.maps.Circle({
-          strokeColor: '#FF0000',
-          strokeOpacity: 0.8,
+          strokeColor: '#441F76',
+          strokeOpacity: 0.4,
           strokeWeight: 1,
-          fillColor: '#FF0000',
-          fillOpacity: 0.35,
+          fillColor: '#441F76',
+          fillOpacity: 0.15,
           map: this.map,
-          center: new google.maps.LatLng(location.coords.latitude ,location.coords.longitude),
+          center: latLng,
           radius: 500
         });
 
         this.loadingCtrl.dismissLoadingWindow();
 
-    })
+    // })
   }
 
   addMarker(){
@@ -159,10 +162,10 @@ export class HomePage {
 
   requestToMeet(){
     this.loadingCtrl.presentLoadingWindow('Please Wait');
-    this.geolocation.getCurrentPosition().then((location) => {
+    // this.geolocation.getCurrentPosition().then((location) => {
     console.log(location);
-    var userLat =  location.coords.latitude;
-    var userLng =  location.coords.longitude;
+    var userLat =  this.mainServices.currentLatitude;
+    var userLng =  this.mainServices.currentLongitude;
     let headers = new Headers(
       {
         'Content-Type': 'application/json',
@@ -196,7 +199,7 @@ export class HomePage {
         }
       }
       );
-    });
+    // });
   }
 
   addNewMarker(latitude, longitude){
@@ -205,15 +208,16 @@ export class HomePage {
       map: this.map,
       draggable: false,
       animation: google.maps.Animation.BOUNCE,
-      position: new google.maps.LatLng(latitude ,longitude)
+      position: new google.maps.LatLng(latitude ,longitude),
+      icon: './assets/imgs/friends.svg'
     });
 
     var cityCircle = new google.maps.Circle({
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
+      strokeColor: '#FF4847',
+      strokeOpacity: 0.4,
       strokeWeight: 1,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
+      fillColor: '#FF4847',
+      fillOpacity: 0.15,
       map: this.map,
       center: new google.maps.LatLng(latitude ,longitude),
       radius: 500

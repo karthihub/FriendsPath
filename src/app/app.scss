@@ -150,3 +150,48 @@
   .mainLightClr{
       color: #3da1db !important;
   }
+
+
+  // Material Design Sidemenu
+#menu-material {
+  .menu-header {
+    padding: 30px 15px;
+    background-image: url('../assets/imgs/map.png');
+    background-size: cover;
+    color: white;
+    .name {
+      font-weight: bolder;
+      margin-bottom: 3px;
+      font-size: 1.2em;
+    }
+    .e-mail {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 1.1em;
+    }
+  }
+  .user-avatar {
+    max-width: 125px;height: 125px;
+    padding: .5em;
+    height: 12vh;
+    border-radius: 50%;
+  }
+  h3,
+  .label,
+  {
+    color: #999;
+    font-weight: 400;
+  }
+  ion-icon {
+    color: #777;
+  }
+}
+
+.menus{
+  text-align: center;
+  padding: 5%;
+
+  p{
+    font-size: 0.7em;
+  }
+}

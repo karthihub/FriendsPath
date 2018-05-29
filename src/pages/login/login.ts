@@ -44,11 +44,14 @@ export class LoginPage {
 
   signInPageNavigation(){
 
-    this.geolocation.getCurrentPosition().then((location) => {
+    // this.geolocation.getCurrentPosition().then((location) => {
       this.loadingCtrl.presentLoadingWindow('Please Wait');
       console.log("Current location : ", location);
-      this.userLoginData.value.latitude =  location.coords.latitude;
-      this.userLoginData.value.longitude =  location.coords.longitude;
+      // this.userLoginData.value.latitude =  location.coords.latitude;
+      // this.userLoginData.value.longitude =  location.coords.longitude;
+
+      this.userLoginData.value.latitude =  this.mainServices.currentLatitude;
+      this.userLoginData.value.longitude =  this.mainServices.currentLongitude;
 
       let headers = new Headers(
         {
@@ -69,6 +72,9 @@ export class LoginPage {
               this.messageCtrl.presentToast(success.message, "greenClr");
               localStorage.setItem('userID', success.body[0].userID);
               localStorage.setItem('userName', success.body[0].userName);
+              localStorage.setItem('userMobile', success.body[0].userMobile);
+              this.mainServices.userMobile = success.body[0].userMobile;
+              this.mainServices.userName = success.body[0].userName;
               this.navCtrl.setRoot("HomePage");
               break;
             case 401:
@@ -79,7 +85,7 @@ export class LoginPage {
           console.log(JSON.stringify(success));
         }
         );
-    });
+    // });
   }
 
   ionViewDidLoad() {

@@ -7,6 +7,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Device } from '@ionic-native/device';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { Geolocation } from '@ionic-native/geolocation';
 
 declare var FirebasePlugin: any;
 declare var cordova: any;
@@ -21,21 +22,29 @@ export class MyApp {
   public deviceUUID:any;
   @ViewChild(Nav) nav: Nav;
   public appPermissionReq:Array<any> = [];
-
+  public userID:any;
+  public userName:any;
+  public userMobile:any;
+  public watch:any
+  public currentLatitude:any;
+  public currentLongitude:any;
+  
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public device: Device,
-              public modalCtrl: ModalController, private androidPermissions: AndroidPermissions, private diagnostic: Diagnostic) {
+              public modalCtrl: ModalController, private androidPermissions: AndroidPermissions, private diagnostic: Diagnostic,
+              private geolocation: Geolocation) {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.appPermissionReq = [];
       this.devicePlatform = this.device.platform;
       this.deviceUUID = this.device.uuid;
-
+      this.userName = "Loading..";
+      this.userMobile = "Loading..";
       // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
       //   result => console.log('Has permission?',result.hasPermission),
       //   err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
       // );
-      
+      this.getCurrentPosition();
       this.fcmNotification();
       statusBar.styleDefault();
       splashScreen.hide();
@@ -114,4 +123,36 @@ export class MyApp {
     });
 
   }
+
+  getCurrentPosition(){
+    var watch = this.geolocation.watchPosition();
+watch.subscribe((data) => {
+ // data can be a set of coordinates, or an error (if an error occurred).
+console.log(data);
+ this.currentLatitude = data.coords.latitude;
+ this.currentLongitude = data.coords.longitude;
+});
+  }
+
+  addNewGroupModal() {
+    const addNewGroupModal = this.modalCtrl.create('AddNewGroupPage');
+    addNewGroupModal.onDidDismiss(data => {
+      console.log(data);
+    });
+    addNewGroupModal.present();
+  }
+
+  viewGroupListModal(){
+    const viewGroupListModal = this.modalCtrl.create('GroupListPage');
+    viewGroupListModal.onDidDismiss(data => {
+      console.log(data);
+    });
+    viewGroupListModal.present();
+  }
+
+  logoutUser(){
+    localStorage.clear();
+    this.nav.setRoot('LoginPage');
+  }
+  
 }
