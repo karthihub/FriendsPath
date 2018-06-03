@@ -12,7 +12,8 @@
             <ion-icon name="md-close"></ion-icon>
           </button>
         </ion-buttons>
-    <ion-title>Add New Group</ion-title>
+    <ion-title *ngIf="userGruopEditFlag">Edit Group</ion-title>
+    <ion-title *ngIf="!userGruopEditFlag">Add New Group</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -29,7 +30,7 @@
                   </ion-item>
 
                     <ion-item>
-                      Add Group Members [Mini 01, Max 10]
+                      Add Group Members [Mini 02, Max 10]
                     </ion-item>
 
                       <div class="contactList">
@@ -48,7 +49,8 @@
                           </span>
                         </div>
               </ion-list> 
-              <button class="login-btn"  ion-button block (click)="addNewGroup()">Add Group</button>
+              <button class="login-btn"  *ngIf="!userGruopEditFlag" ion-button block (click)="addNewGroup()">Add Group</button>
+              <button class="login-btn"  *ngIf="userGruopEditFlag" ion-button block (click)="updateGroup()">Update Group</button>
         </ion-card>
       </ion-grid>
 

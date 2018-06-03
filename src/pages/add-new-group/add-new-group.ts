@@ -26,12 +26,23 @@ export class AddNewGroupPage {
   public contactList: any;
   public groupMemList: Array<any> = [];
   public groupName: any;
+  public userGruopEditFlag:any;
+  public userGruopEdit:any;
 
   constructor(public navparams: NavParams, public commonService: CommonservicesProvider, private formBuilder: FormBuilder,
     private http: Http, public navCtrl: NavController, public navParams: NavParams, public mainServices: MyApp,
     public messageCtrl: ToastControllerComponent, public loadingCtrl: LoadingControllerComponent,
     public contacts: Contacts, private view: ViewController) {
-    this.groupMemList = [];
+    
+    if(this.navparams.get('edit')){
+      this.userGruopEditFlag = true;
+      this.userGruopEdit = this.navparams.get('group');
+      this.groupName = this.userGruopEdit.fGroupName;
+      this.groupMemList =this.userGruopEdit.fGroupMenbers;
+    }else{
+      this.userGruopEditFlag = false;
+      this.groupMemList = [];
+    }
   }
 
   ionViewDidLoad() {
@@ -153,7 +164,53 @@ export class AddNewGroupPage {
             case 200:
               this.loadingCtrl.dismissLoadingWindow();
               this.messageCtrl.presentToast(success.message, "greenClr");
-              // this.navCtrl.push("HomePage");
+              this.view.dismiss();
+              break;
+            case 401:
+              this.loadingCtrl.dismissLoadingWindow();
+              this.messageCtrl.presentToast(success.message, "redClr");
+              break;
+          }
+          console.log(JSON.stringify(success));
+        }
+        );
+
+    }
+
+
+  }
+
+  updateGroup() {
+    if (this.groupName == undefined || this.groupName.length < 4) {
+      this.messageCtrl.presentToast("Group Name should be minimun 4 Char..", "redClr");
+    } else if (this.groupMemList.length < 2) {
+      this.messageCtrl.presentToast("Group should have minimum 2 Members..", "redClr");
+    } else {
+
+      this.loadingCtrl.presentLoadingWindow('Please Wait');
+      var addNewGroup = {
+        fGroupID: this.userGruopEdit.fGroupID,
+        fGroupMenbers: this.groupMemList,
+        groupName: this.groupName
+      }
+      let headers = new Headers(
+        {
+          'Content-Type': 'application/json',
+        });
+
+      let options = new RequestOptions({ headers: headers });
+
+      //Post method to send register data
+      this.http.post(this.commonService.api + '/' + this.commonService.updateUserGroup + '/', addNewGroup, options)
+        .subscribe((res: any) => {
+          console.log("res" + res);
+          let success = JSON.parse(res._body);
+
+          switch (success.status) {
+            case 200:
+              this.loadingCtrl.dismissLoadingWindow();
+              this.messageCtrl.presentToast(success.message, "greenClr");
+              this.view.dismiss();
               break;
             case 401:
               this.loadingCtrl.dismissLoadingWindow();

@@ -4,7 +4,7 @@
     <ion-content>
       <div class="menu-header">
         <!--material-design-background-->
-        <img class="user-avatar round" style="height:90px;max-width:90px;" src="./assets/imgs/avatar.png"
+        <img class="user-avatar round" style="height:90px;max-width:90px;" src="{{avatar}}"
         />
         <p class="name">{{userName}}</p>
         <p class="e-mail">{{userMobile}}</p>
@@ -19,7 +19,7 @@
               <ion-icon name="md-game-controller-b"></ion-icon>
               <p>Create Group</p>
           </div>  
-          <div class="item col col-12 menus" menuClose="left">
+          <div class="item col col-12 menus" menuClose="left" (click)="addContactModal()">
               <ion-icon name="md-person-add"></ion-icon>
               <p>Create Contact</p>
           </div>  
@@ -30,25 +30,25 @@
             <ion-icon name="md-flag"></ion-icon>
             <p>View Groups</p>
        </div> 
-       <div class="item col col-12 menus" menuClose="left">
+       <div class="item col col-12 menus" menuClose="left" (click)="viewContactListModal()">
           <ion-icon name="md-contacts"></ion-icon>
           <p>View Conatcts</p>
      </div>  
    </div> 
 
      <div class="row">
-        <div class="item col col-12 menus" menuClose="left">
+        <div class="item col col-12 menus" menuClose="left" (click)="friendsLastPath()">
             <ion-icon name="md-paw"></ion-icon>
             <p>My Friends Path</p>
         </div>  
-        <div class="item col col-12 menus" menuClose="left">
+        <div class="item col col-12 menus" menuClose="left" (click)="viewNotificationListModal()">
             <ion-icon name="md-notifications"></ion-icon>
             <p>My Notifications</p>
        </div>   
    </div> 
 
    <div class="row">
-      <div class="item col col-12 menus" menuClose="left">
+      <div class="item col col-12 menus" menuClose="left" (click)="settingsModal()">
           <ion-icon name="md-options"></ion-icon>
           <p>Setting</p>
       </div>

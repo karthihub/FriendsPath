@@ -18,13 +18,18 @@
   </ion-header>
   
   
-  <ion-content>
-  
+  <ion-content>  
     <ion-grid>
       <ion-card>
           <ion-list>
-              <ion-item-sliding *ngFor="let group of groupList">
-                <ion-item >
+
+              <ion-item style="text-align: center" *ngIf="groupList?.length == 0">
+                  <h2><ion-icon name="ios-sad-outline" class="skeinClr" item-start large></ion-icon> No Groups found</h2>
+                </ion-item>
+
+
+              <ion-item-sliding *ngFor="let group of groupList" >
+                <ion-item (click)="groupLocaationData(group.fGroupMenbers)">
                   <ion-avatar item-start>
                     <img src="./assets/imgs/group.png">
                   </ion-avatar>
@@ -38,12 +43,12 @@
                 </ion-item>
 
                 <ion-item-options side="right">
-                    <button ion-button icon-only color="primary">
+                    <button ion-button icon-only color="primary" (click)="editUserGroup(group)">
                       <ion-icon name="md-create"></ion-icon>
                     </button>
-                    <button ion-button icon-only color="danger">
+                    <button ion-button icon-only color="danger" (click)="userGroupDelete(group.fGroupID)">
                         <ion-icon name="md-trash"></ion-icon>
-                      </button>
+                    </button>
                   </ion-item-options>
 
               </ion-item-sliding>

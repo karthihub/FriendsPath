@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CommonservicesProvider {
 
-  // api:any                 = "https://www.skeinlab.com/skeinfp";
-  api:any = "http://192.168.1.8:6004";
+  api:any                 = "https://www.skeinlab.com/skeinfp";
+  // api:any = "http://192.168.1.8:6004";
   empRegistration = "empRegistration";
   useAuthendication = "useAuthendication";
   empContactAdd = "empContactAdd";
@@ -18,6 +18,11 @@ export class CommonservicesProvider {
   getUserGroupList = "getUserGroupList";
   updateUserGroup = "updateUserGroup";
   deleteUserGroup = "deleteUserGroup";
+  getFriendsGroupLocations = "getFriendsGroupLocations";
+  generateOtp = "generateOtp";
+  useForgotPass = "useForgotPass";
+  userLogout = "userLogout";
+  getNotificationList = "getNotificationList";
   // constructor(public http: HttpClient) {
   //   console.log('Hello CommonservicesProvider Provider');
   // }

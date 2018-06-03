@@ -1,0 +1,43 @@
+page-setting {
+
+    ion-content {
+        background-color: #441F76 !important;
+        color: #dedede !important;
+
+        ion-grid, ion-card, ion-list, ion-item, button, .list-header-md{
+            background-color: #441F76 !important;
+            color: #dedede !important;
+        }
+
+    .color1{
+        background: #7553A2;
+        padding: 10%;
+        border-radius: 30%;
+        margin: 0% 2.5%;
+        max-width: 20%;
+    }
+    .color2{
+        background: #59348A;
+        padding: 10%;
+        border-radius: 30%;
+        margin: 0% 2.5%;
+        max-width: 20%;
+    }
+    .color3{
+        background: #310E5F;
+        padding: 10%;
+        border-radius: 30%;
+        margin: 0% 2.5%;
+        max-width: 20%;
+    }
+    .color4{
+        background: #1F0442;
+        padding: 10%;
+        border-radius: 30%;
+        margin: 0% 2.5%;
+        max-width: 20%;
+    }
+
+}
+
+}

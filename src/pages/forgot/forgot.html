@@ -24,11 +24,11 @@
           </ion-item>
   
             <ion-item>
-              <ion-label floating>Registered Mobile Number</ion-label>
-              <ion-input type="tel" formControlName="mobile"></ion-input>
+              <ion-label floating>OTP Number</ion-label>
+              <ion-input type="tel" formControlName="otp"></ion-input>
             </ion-item>
-            <p class="restriction" *ngIf="!userForgot.controls.mobile.valid && (userForgot.controls.mobile.dirty || submitAtttempt)">
-              <span>* </span>Mobile number should be with Country Code ex: +91</p>
+            <p class="restriction" *ngIf="!userForgot.controls.otp.valid && (userForgot.controls.otp.dirty || submitAtttempt)">
+              <span>* </span>OTP number should be 6 Digits</p>
   
             <ion-item>
               <ion-label floating>New Password</ion-label>
@@ -39,8 +39,8 @@
   
         </ion-list>
   
-        <button class="login-btn" [disabled]="!userForgot.valid" ion-button block>Generate OTP</button>
-        <button ion-button class="signin" clear (click)="signinPageNavigation()">Remembered Credentials?</button>
+        <button class="login-btn" [disabled]="!userForgot.valid" ion-button block (click)="forgotPasswordBTN()">Forgot Password</button>
+        <button ion-button class="signin" clear (click)="signInPage()">Remembered Credentials?</button>
         </form>
       </ion-card>
     </ion-grid>

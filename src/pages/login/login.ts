@@ -23,69 +23,94 @@ export class LoginPage {
   public userLoginData: FormGroup;
 
   constructor(public navparams: NavParams, public commonService: CommonservicesProvider, private formBuilder: FormBuilder,
-              private http: Http, public navCtrl: NavController, public navParams: NavParams, public mainServices: MyApp,
-              public messageCtrl: ToastControllerComponent, public loadingCtrl: LoadingControllerComponent,
-              private geolocation: Geolocation) {
+    private http: Http, public navCtrl: NavController, public navParams: NavParams, public mainServices: MyApp,
+    public messageCtrl: ToastControllerComponent, public loadingCtrl: LoadingControllerComponent,
+    private geolocation: Geolocation) {
 
-                this.userLoginData = this.formBuilder.group({
+    this.userLoginData = this.formBuilder.group({
 
-                  userName: ['krish', Validators.compose([Validators.minLength(4), Validators.maxLength(15), Validators.required])],
-                  password: ['karthi@123', Validators.compose([Validators.minLength(8), Validators.maxLength(12), Validators.required])]
-                });
+      userName: ['krish', Validators.compose([Validators.minLength(4), Validators.maxLength(15), Validators.required])],
+      password: ['karthi@123', Validators.compose([Validators.minLength(8), Validators.maxLength(12), Validators.required])]
+    });
   }
 
-  signupPageNavigation(){
+  signupPageNavigation() {
     this.mainServices.signupNavigate();
   }
 
-  forgotPageNavigation(){
+  forgotPageNavigation() {
     this.mainServices.forgotNavigate();
   }
 
-  signInPageNavigation(){
+  signInPageNavigation() {
 
     // this.geolocation.getCurrentPosition().then((location) => {
-      this.loadingCtrl.presentLoadingWindow('Please Wait');
-      console.log("Current location : ", location);
-      // this.userLoginData.value.latitude =  location.coords.latitude;
-      // this.userLoginData.value.longitude =  location.coords.longitude;
+    this.loadingCtrl.presentLoadingWindow('Please Wait');
+    console.log("Current location : ", location);
+    // this.userLoginData.value.latitude =  location.coords.latitude;
+    // this.userLoginData.value.longitude =  location.coords.longitude;
 
-      this.userLoginData.value.latitude =  this.mainServices.currentLatitude;
-      this.userLoginData.value.longitude =  this.mainServices.currentLongitude;
+    this.userLoginData.value.latitude = this.mainServices.currentLatitude;
+    this.userLoginData.value.longitude = this.mainServices.currentLongitude;
+    this.userLoginData.value.deviceUUID = this.mainServices.deviceUUID;
+    this.userLoginData.value.fcmTocken = this.mainServices.fcmTocken;
 
-      let headers = new Headers(
-        {
-          'Content-Type': 'application/json',
-        });
-  
-      let options = new RequestOptions({ headers: headers });
-  
-      //Post method to send register data
-      this.http.post(this.commonService.api + '/' + this.commonService.useAuthendication + '/', this.userLoginData.value, options)
-        .subscribe((res: any) => {
-          console.log("res" + res);
-          let success = JSON.parse(res._body);
-  
-          switch (success.status) {
-            case 200:
-              this.loadingCtrl.dismissLoadingWindow();
-              this.messageCtrl.presentToast(success.message, "greenClr");
-              localStorage.setItem('userID', success.body[0].userID);
-              localStorage.setItem('userName', success.body[0].userName);
-              localStorage.setItem('userMobile', success.body[0].userMobile);
-              this.mainServices.userMobile = success.body[0].userMobile;
-              this.mainServices.userName = success.body[0].userName;
-              this.navCtrl.setRoot("HomePage");
-              break;
-            case 401:
-              this.loadingCtrl.dismissLoadingWindow();
-              this.messageCtrl.presentToast(success.message, "redClr");
-              break;
-          }
-          console.log(JSON.stringify(success));
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json',
+      });
+
+    let options = new RequestOptions({ headers: headers });
+
+    //Post method to send register data
+    this.http.post(this.commonService.api + '/' + this.commonService.useAuthendication + '/', this.userLoginData.value, options)
+      .subscribe((res: any) => {
+        console.log("res" + res);
+        let success = JSON.parse(res._body);
+
+        switch (success.status) {
+          case 200:
+            this.loadingCtrl.dismissLoadingWindow();
+            this.messageCtrl.presentToast(success.message, "greenClr");
+            localStorage.setItem('userID', success.body[0].userID);
+            localStorage.setItem('userName', success.body[0].userName);
+            localStorage.setItem('userMobile', success.body[0].userMobile);
+            this.mainServices.userMobile = success.body[0].userMobile;
+            this.mainServices.userName = success.body[0].userName;
+            this.navCtrl.setRoot("HomePage");
+            break;
+          case 401:
+            this.loadingCtrl.dismissLoadingWindow();
+            this.messageCtrl.presentToast(success.message, "redClr");
+            break;
         }
-        );
+        console.log(JSON.stringify(success));
+      }
+      );
     // });
+  }
+
+  userForgotPassword() {
+
+    this.loadingCtrl.presentLoadingWindow('Please Wait');
+    let headers = new Headers({ 'Content-Type': 'application/json', });
+    let options = new RequestOptions({ headers: headers });
+    this.http.post(this.commonService.api + '/' + this.commonService.generateOtp + '/', { userDeviceTocken: this.mainServices.deviceUUID }, options)
+      .subscribe((res: any) => {
+        console.log("res" + res);
+        let success = JSON.parse(res._body);
+        switch (success.status) {
+          case 200:
+            this.loadingCtrl.dismissLoadingWindow();
+            this.mainServices.forgotNavigate();
+            break;
+          case 401:
+            this.loadingCtrl.dismissLoadingWindow();
+            this.messageCtrl.presentToast(success.message, "redClr");
+            break;
+        }
+        console.log(JSON.stringify(success));
+      });
   }
 
   ionViewDidLoad() {

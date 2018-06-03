@@ -28,10 +28,12 @@ export class MyApp {
   public watch:any
   public currentLatitude:any;
   public currentLongitude:any;
+  tempIDAvatar = Math.floor(Math.random() * Math.floor(6));
+  public avatar = "./assets/imgs/"+this.tempIDAvatar+".png";
   
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public device: Device,
               public modalCtrl: ModalController, private androidPermissions: AndroidPermissions, private diagnostic: Diagnostic,
-              private geolocation: Geolocation) {
+              private geolocation: Geolocation, private toastCtrl: ToastController ) {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -40,6 +42,8 @@ export class MyApp {
       this.deviceUUID = this.device.uuid;
       this.userName = "Loading..";
       this.userMobile = "Loading..";
+      this.fcmTocken = "";
+      console.log(this.avatar);
       // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
       //   result => console.log('Has permission?',result.hasPermission),
       //   err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
@@ -100,7 +104,9 @@ export class MyApp {
   fcmNotification() {
 
     FirebasePlugin.getToken((token) => {
-      this.fcmTocken = token;
+      if(token){
+        this.fcmTocken = token;
+      }
       console.log("Token value is", token);
     }, (error) => {
       console.log("error in token fcm processing", error);
@@ -109,8 +115,20 @@ export class MyApp {
     FirebasePlugin.onNotificationOpen((notification: any) => {
 
         console.log("notification from firebase", notification);
-        const notifyAlert = this.modalCtrl.create('NotificationAlertPage', {notification : notification});
-        notifyAlert.present();
+        if(notification.title == "New User Request"){
+          const notifyAlert = this.modalCtrl.create('NotificationAlertPage', {notification : notification});
+          notifyAlert.present();
+        }else if(notification.title == 'Forgot Password'){
+          let forgotPass = this.toastCtrl.create({
+            message: notification.body,
+            duration: 90000,
+            showCloseButton: true,
+            position: 'bottom'
+          });
+      
+          forgotPass.present();
+        }
+        
 
     }, (error) => {
       console.log("notification from firebase", error);
@@ -146,13 +164,52 @@ console.log(data);
     const viewGroupListModal = this.modalCtrl.create('GroupListPage');
     viewGroupListModal.onDidDismiss(data => {
       console.log(data);
+      this.nav.setRoot('HomePage', {fGroupMenbers : data});
     });
     viewGroupListModal.present();
   }
 
   logoutUser(){
-    localStorage.clear();
-    this.nav.setRoot('LoginPage');
+    this.nav.setRoot('HomePage', {logoutUser : 'logoutUser'});
+  }
+
+  addContactModal() {
+    const contactModal = this.modalCtrl.create('ContactModalPage');
+    contactModal.onDidDismiss(data => {
+      console.log(data);
+    });
+    contactModal.present();
+  }
+
+  viewContactListModal() {
+    const contactListModal = this.modalCtrl.create('ContactListPage');
+    contactListModal.onDidDismiss(data => {
+
+      if(data){
+        this.nav.setRoot('HomePage', {location : data});
+        // this.addNewMarker(data[0].userLat, data[0].userLng);
+        // console.log(data);
+        }
+    });
+    contactListModal.present();
+  }
+
+  viewNotificationListModal() {
+    const NotificationListModal = this.modalCtrl.create('NotificationListPage');
+    NotificationListModal.onDidDismiss(data => {
+    });
+    NotificationListModal.present();
+  }
+
+  friendsLastPath(){
+    this.nav.setRoot('HomePage', {friendsLastPath : 'friendsLastPath'});
+  }
+
+  settingsModal(){
+    const SettingPage = this.modalCtrl.create('SettingPage');
+    SettingPage.onDidDismiss(data => {
+    });
+    SettingPage.present();
   }
   
 }

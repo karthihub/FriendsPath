@@ -101,7 +101,7 @@ export class NotificationAlertPage {
     let options = new RequestOptions({ headers: headers });
 
     //Post method to send register data
-    this.http.post(this.commonService.api + '/' + this.commonService.updateLatLngRequest + '/', {reqStatus : reqStatus, userLat : userLat, userLng : userLng, reqNumber : this.reqNumber}, options)
+    this.http.post(this.commonService.api + '/' + this.commonService.updateLatLngRequest + '/', {reqStatus : reqStatus, userLat : userLat, userLng : userLng, reqNumber : this.reqNumber, userName : localStorage.getItem('userName')}, options)
       .subscribe((res: any) => {
         console.log("res" + res);
         let success = JSON.parse(res._body);
